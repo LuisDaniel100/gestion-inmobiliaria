@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Gestión Inmobiliaria</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+    <aside class="sidebar"><a class="brand" href="#cartera"><span
+                class="monogram">GI</span><span>Gestión<br>Inmobiliaria</span></a>
+        <p class="nav-label">Panel de asesores</p>
+        <nav aria-label="Vistas"><a href="#cartera" data-view="cartera">01 <span>Mi cartera y resultados</span></a><a
+                href="#viviendas" data-view="viviendas">02 <span>Viviendas disponibles</span></a></nav>
+        <div class="sidebar-foot">Panel de asesores<p>Cartera, resultados y viviendas</p>
+        </div>
+    </aside>
+    <main>
+        <header class="page-heading">
+            <div>
+                <p class="eyebrow">GESTIÓN INMOBILIARIA</p>
+                <h1 id="viewTitle">Tu cartera<br><span>y tus resultados.</span></h1>
+                <p id="viewDescription">Consulta tus números, da seguimiento a tus clientes y encuentra viviendas para
+                    ofrecer.</p>
+            </div><span class="snapshot">Fecha de corte<br><strong>21 sep 2026</strong></span>
+        </header>
+        <p class="demo-note">Datos ficticios para demostración</p>
+        <section id="carteraView" aria-label="Cartera de clientes">
+            <div class="filters"><label>Asesor<select id="advisor"></select></label><label>Estatus<select
+                        id="clientStatus">
+                        <option value="">Todos los estatus</option>
+                        <option>Vendida</option>
+                        <option>En proceso</option>
+                        <option>Visita programada</option>
+                        <option>Rechazada</option>
+                    </select></label><label class="search">Buscar cliente o vivienda<input id="clientSearch"
+                        type="search" placeholder="Nombre, identificador o dirección"></label><button id="resetClients"
+                    class="secondary">Limpiar filtros</button></div>
+            <div class="metrics">
+                <article><span>Clientes en cartera</span><strong id="totalClients">0</strong><small>Del asesor
+                        seleccionado</small></article>
+                <article class="featured"><span>Ventas cerradas</span><strong id="soldClients">0</strong><small
+                        id="soldAmount"></small></article>
+                <article><span>Seguimientos pendientes</span><strong id="pendingClients">0</strong><small>En proceso o
+                        con visita</small></article>
+                <article><span>Seguimientos vencidos</span><strong id="overdueClients">0</strong><small>Al 21 de
+                        septiembre de 2026</small></article>
+            </div>
+            <section class="table-panel">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">MIS CLIENTES</p>
+                        <h2 id="advisorTitle">Cartera del asesor</h2>
+                    </div><span id="clientCount" class="counter" aria-live="polite"></span>
+                </div>
+                <p class="table-hint" id="tableHint">Pulsa el identificador para abrir la ficha. Desliza la tabla hacia los lados
+                    o enfócala y usa las flechas del teclado para consultar todas las columnas.</p>
+                <p id="clientEmpty" class="empty" role="status" hidden>No hay clientes que coincidan. Prueba otros filtros.</p>
+                <div id="clientTableScroll" class="table-scroll" tabindex="0" role="region" aria-describedby="tableHint" aria-label="Tabla de clientes, desplazable horizontalmente">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cliente</th>
+                                <th>Vivienda</th>
+                                <th>Dirección de la vivienda</th>
+                                <th>Precio</th>
+                                <th>Estatus</th>
+                                <th>Último contacto</th>
+                                <th>Próximo seguimiento</th>
+                                <th>Observación</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientRows"></tbody>
+                    </table>
+                </div>
+                <p class="table-footer">Los indicadores resumen toda la cartera del asesor; los filtros de estatus y
+                    búsqueda afectan a la tabla.</p>
+            </section>
+        </section>
+        <section id="viviendasView" aria-label="Viviendas disponibles" hidden>
+            <div class="filters property-filters"><label>Tipo<select id="propertyType">
+                        <option value="">Todos los tipos</option>
+                        <option>Casa</option>
+                        <option>Departamento</option>
+                    </select></label><label>Precio máximo<select id="maxPrice">
+                        <option value="">Sin límite</option>
+                        <option value="2000000">$2,000,000</option>
+                        <option value="3000000">$3,000,000</option>
+                        <option value="4000000">$4,000,000</option>
+                        <option value="5000000">$5,000,000</option>
+                    </select></label><label>Recámaras<select id="bedrooms">
+                        <option value="">Cualquier número</option>
+                        <option value="2">2 o más</option>
+                        <option value="3">3 o más</option>
+                        <option value="4">4 o más</option>
+                    </select></label><label>Disponibilidad<select id="availability">
+                        <option value="">Disponibles y apartadas</option>
+                        <option>Disponible</option>
+                        <option>Apartada</option>
+                    </select></label><label class="search">Buscar vivienda<input id="propertySearch" type="search"
+                        placeholder="Identificador o dirección"></label><button id="resetProperties"
+                    class="secondary">Limpiar filtros</button></div>
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">INVENTARIO COMERCIAL</p>
+                    <h2>Viviendas para ofrecer</h2>
+                </div><span id="propertyCount" class="counter" aria-live="polite"></span>
+            </div>
+            <p class="table-hint">Consulta las viviendas disponibles y apartadas del equipo. Las viviendas vendidas solo
+                se consultan
+                desde su ficha en la cartera.</p>
+            <div id="propertyGrid" class="property-grid"></div>
+        </section>
+        <footer>Gestión Inmobiliaria · Importes en MXN</footer>
+    </main>
+    <dialog id="propertyDialog" aria-labelledby="dialogTitle"><button id="closeDialog" class="close-dialog"
+            aria-label="Cerrar ficha">×</button>
+        <div id="propertyDetail"></div>
+    </dialog>
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
